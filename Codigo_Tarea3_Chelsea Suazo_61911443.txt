@@ -1,0 +1,61 @@
+/*
+Elaborar un programa en Arduino donde se va a utilizar dos pulsadores y dos LED’s en el cual va a tener
+una salida en pantalla (consola serial del dispositivo) de un numero entero, al iniciar Arduino el numero 
+comenzara en cero y este número podrá incrementar o disminuir cada vez que el usuario pulse un 
+pulsador; asignar los pulsadores uno para incrementar y otro para disminuir. Los LED indicaran que 
+acción está sucediendo; utilice un LED verde para incrementar y un LED rojo para disminuir.
+*/
+
+int contador = 0;
+
+void setup (){
+  Serial.begin(9600);
+  pinMode(2,INPUT); // pin 2 como entrada
+  pinMode(3,OUTPUT);// pin 3 como entrada
+  pinMode(7,INPUT); // pin 7 como entrada
+  pinMode(9,OUTPUT);// pin 9 como entrada
+  Serial.println(contador);
+}
+
+void loop(){ 
+  int estado = digitalRead(7);
+  int estado2 = digitalRead(2);
+ 
+
+  if (digitalRead(2) == HIGH){ //evaluo si la entrada esta a nivel alto (Pulsador presionado)
+    	digitalWrite(3, HIGH); //enciendo LED
+    	if(estado2 == 1 ) {
+    	contador = contador - 1;
+  
+    	Serial.println(contador);
+    	while(digitalRead(2) == 1){
+     	 //Al precionar le boton el estado esta en 1, y al mantener presionado
+     	 //el boton el estado sigue en 1, por lo que no hara nada, no seguira contando
+   		 }
+  		} 
+  	}
+  else{
+    digitalWrite(3, LOW); //apago LED
+  }
+  
+  
+  if (digitalRead(7) == LOW){ //evaluo si la entrada esta a nivel alto (Pulsador presionado)
+                             // cambio a LOW por cambio de conexion, para asi empezar en 0
+                             // y al precionar que cambiara a 1
+    	digitalWrite(9, HIGH); //enciendo LED
+   		if(estado == 0 ) {
+    	contador = contador + 1;
+  
+    	Serial.println(contador);
+   		while(digitalRead(7) == 0){
+     	 //Al precionar le boton el estado esta en 0, y al mantener presionado
+     	 //el boton el estado sigue en 0, por lo que no hara nada, no seguira contando
+   		 }
+	  } 
+ 	}
+  else{
+    digitalWrite(9, LOW); //apago LED
+  }
+}
+
+ 
